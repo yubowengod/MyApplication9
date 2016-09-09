@@ -10,6 +10,14 @@
     android:orientation="vertical"
     tools:context="com.example.god.myapplication.MainActivity">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView1"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,14 +33,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt"
         android:text="Hello World!"/>
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:id="@+id/imageview"/>
-    <ImageView
-    android:layout_width="80dp"
-    android:layout_height="80dp"
-    android:id="@+id/imageview1"/>
+
 
     <ListView
         android:layout_width="match_parent"

@@ -7,7 +7,7 @@ public class Data_up {
 //    private static String a ="feiyangxiaomi";
 
     private static String SERVICE_URL = "http://192.168.1.117:8011/Service1.asmx";
-//    private static String SERVICE_URL = "http://10.148.83.162:8011/Service1.asmx";
+//    private static String SERVICE_URL = "http://10.148.80.50:8011/Service1.asmx";
 
     public static String getSERVICE_URL() {
         return SERVICE_URL;

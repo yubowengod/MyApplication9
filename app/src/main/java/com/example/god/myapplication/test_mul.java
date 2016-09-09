@@ -36,11 +36,11 @@ public class test_mul {
     public static String List_result ;
 
 
-    public static void getImageromSdk(){
+    public static void getImageromSdk(String pic_name){
 
         try{
                 String methodName = "ImgToBase64String";
-                getImageFromAndroid(methodName,"111");   //调用webservice
+                getImageFromAndroid(methodName,pic_name);   //调用webservice
                 Log.i("connectWebService", "start");
         }
         catch(Exception e){
@@ -48,7 +48,7 @@ public class test_mul {
         }
     }
 
-    public static String getImageFromAndroid(String methodName,String downloadBuffer){
+    public static String getImageFromAndroid(String methodName,String pic_name){
         Log.i("进入端口方法", "进入端口方法");
         // 创建HttpTransportSE传输对象
         HttpTransportSE ht = new HttpTransportSE(Data_up.getSERVICE_URL());
@@ -59,7 +59,7 @@ public class test_mul {
             // 实例化SoapObject对象
             SoapObject soapObject = new SoapObject(Data_up.getSERVICE_NAMESPACE(),methodName);
 
-            soapObject.addProperty("Imagefilename","111");
+            soapObject.addProperty("Imagefilename",pic_name);
 
             envelope.bodyOut = soapObject;
             // 设置与.NET提供的webservice保持较好的兼容性

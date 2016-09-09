@@ -46,16 +46,16 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     private List<Fruit> fruitList = new ArrayList<Fruit>();
-
+    private ArrayList<Fruit> fruit_array = new ArrayList<Fruit>();
     private ExecutorService executorService;
-    private ExecutorService executorService1;
+//    private ExecutorService executorService1;
 
-
-private EditText txt;
+    private EditText txt;
     private Button btn;
     private ImageView imageView1,imageView2;
     Bitmap bm;
-    Bitmap bm1;
+    ArrayList<Bitmap> bm_array = new ArrayList<Bitmap>();
+
     listview_pic picqqq;
 
 
@@ -93,22 +93,17 @@ private EditText txt;
 
         handler = new Handler();
 
-//        executorService1 = Executors.newFixedThreadPool(5);
 
         executorService = Executors.newFixedThreadPool(5);
 
         txt = (EditText) findViewById(R.id.txt);
-        imageView1=(ImageView)findViewById(R.id.imageview);
-//        getInfo();
 
 
         btn=(Button)findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  test_pool();
                 synchronized (this) {
-                    // test_find();
                     test_pool();
                 }
             }
@@ -118,13 +113,7 @@ private EditText txt;
 
         listview_download();
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-//                Fruit fruit = fruitList.get(position);
-//                Toast.makeText(MainActivity.this, fruit.getName(),Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
 
 
     }
@@ -139,50 +128,42 @@ private EditText txt;
 
                 listview_text_1.getImageromSdk();
 
-                String ww = listview_text_1.getList_result().get(2).toString();
+                for(int i = 0;i<listview_text_1.getList_result().size();i++)
+                {
+                    test_mul_1.getImageromSdk(listview_text_1.getList_result().get(i).toString());
 
-
-                test_mul_1.getImageromSdk();
-                bm=test_mul_1.onDecodeClicked(test_mul_1.List_result);
-
+                    bm_array.add(test_mul_1.onDecodeClicked(test_mul_1.List_result));
+                }
 
                 try {
                     mainHandler.post(new Runnable() {
                         @Override
                         public void run() {
-//                            txt.setText(listview_text_1.getList_result().get(2).toString());
-
-                            ((ImageView)MainActivity.this.findViewById(R.id.imageview)).setImageBitmap(bm);
-                            ((ImageView)MainActivity.this.findViewById(R.id.imageview1)).setImageBitmap(bm);
-
-
+                            for(int i = 0;i<listview_text_1.getList_result().size();i++){
+                                fruit_array.add(new Fruit(listview_text_1.getList_result().get(i).toString(),bm_array.get(i)));
+                                fruitList.add(fruit_array.get(i));
+                            }
 
 
-                            Fruit apple = new Fruit("Apple", bm);
-                            fruitList.add(apple);
-                            Fruit banana = new Fruit("Banana", bm);
-                            fruitList.add(banana);
-                            Fruit orange = new Fruit("Orange", bm);
-                            fruitList.add(orange);
-                            Fruit watermelon = new Fruit("Watermelon", bm);
-                            fruitList.add(watermelon);
-                            Fruit pear = new Fruit("Pear", bm);
-                            fruitList.add(pear);
-                            Fruit grape = new Fruit("Grape", bm);
-                            fruitList.add(grape);
-                            Fruit pineapple = new Fruit("Pineapple", bm);
-                            fruitList.add(pineapple);
-                            Fruit strawberry = new Fruit("Strawberry", bm);
-                            fruitList.add(strawberry);
-                            Fruit cherry = new Fruit("Cherry", bm);
-                            fruitList.add(cherry);
-                            Fruit mango = new Fruit("Mango", bm);
-                            fruitList.add(mango);
+
+
+
+//                            Fruit apple = new Fruit("Apple", bm);
+//                            fruitList.add(apple);
+
 
                             FruitAdapter adapter = new FruitAdapter(MainActivity.this,
                                     R.layout.fruit_item, fruitList);
                             ListView listView = (ListView) findViewById(R.id.list_view);
                             listView.setAdapter(adapter);
+
+                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                                    Fruit fruit = fruitList.get(position);
+                                    Toast.makeText(MainActivity.this, fruit.getName(),Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     });
                 }
